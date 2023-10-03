@@ -17,7 +17,7 @@ export class ContactoService {
   }
 
   saveContacto(request: any):Observable<any>{
-    return this.httpClient.post<any>(this.url+'/save', request).pipe(map(res=>res));
+    return this.httpClient.post<any>(this.url+'/insert', request).pipe(map(res=>res));
   } 
 
   updateContacto(request: any):Observable<any> {

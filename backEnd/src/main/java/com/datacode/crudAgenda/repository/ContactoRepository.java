@@ -20,14 +20,14 @@ public class ContactoRepository implements IContactoRepository {
 
     @Override
     public int save(Contacto contacto) {
-        String query ="Insert into contactos values(?,?,?,?,?,?)";
+        String query ="Insert into contactos (nombres, apellidos, celular, email, direccion, estado) values(?,?,?,?,?,?)";
         return jdbcTemplate.update(query, new Object[]{contacto.getNombres(),contacto.getApellidos(), contacto.getCelular(), contacto.getEmail(), contacto.getDireccion(), contacto.getEstado()});
     }
 
     @Override
     public int update(Contacto contacto) {
-        String query="Update contactos set nombres=?, apellidos=?, celular=?, email=?, direccion=?, estado=?";
-        return jdbcTemplate.update(query, new Object[]{contacto.getNombres(), contacto.getApellidos(), contacto.getCelular(), contacto.getEmail(), contacto.getDireccion(), contacto.getEstado(), contacto.getId()} );
+        String query="Update contactos set nombres=?, apellidos=?, celular=?, email=?, direccion=? where id=?;";
+        return jdbcTemplate.update(query, new Object[]{contacto.getNombres(), contacto.getApellidos(), contacto.getCelular(), contacto.getEmail(), contacto.getDireccion(), contacto.getId()} );
     }
 
     @Override

@@ -22,7 +22,8 @@ export class ContactoComponent {
       apellidos: new FormControl(''),
       celular: new FormControl(''),
       email: new FormControl(''),
-      direccion: new FormControl('')
+      direccion: new FormControl(''),
+      estado: new FormControl('')
     })
   }
 

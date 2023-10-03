@@ -5,4 +5,4 @@ export class contactoModel{
     celular: String='';
     email: String='';
     direccion: String='';
-}
+    estado: String='';}

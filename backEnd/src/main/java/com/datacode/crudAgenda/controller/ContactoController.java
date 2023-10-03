@@ -42,7 +42,7 @@ public class ContactoController {
         return new ResponseEntity<>(serviceResponse, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public ResponseEntity<ServiceResponse> update(@PathVariable int id){
         ServiceResponse serviceResponse= new ServiceResponse();
         int result= iContactoService.deleteById(id);
