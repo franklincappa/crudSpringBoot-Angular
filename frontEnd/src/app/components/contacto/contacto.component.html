@@ -16,15 +16,15 @@
           </tr>
         </thead>
         <tbody class="table-group-divider">
-          <tr>
-            <th scope="row">1</th>
-            <td>Frankin Cappa Ticona</td>
-            <td>996633074</td>
-            <td>franklincappa@gmail.com</td>
-            <td>Lima</td>
+          <tr *ngFor="let item of listaContactos">
+            <th scope="row">{{item.id}}</th>
+            <td>{{item.nombres +' '+ item.apellidos}}</td>
+            <td>{{item.celular}}</td>
+            <td>{{item.email}}</td>
+            <td>{{item.direccion}}</td>
             <td>
-                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-pencil"></i></button>
-                <button type="button" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-pencil" (click)="selectItem(item)" ></i></button>
+                <button type="button" class="btn btn-danger" (click)="delete(item.id)" ><i class="fa fa-trash"></i></button>
             </td>
           </tr>
           
@@ -38,40 +38,42 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <h5 *ngIf="!isUpdate" class="modal-title" id="staticBackdropLabel">Nuevo Contacto</h5>
+          <h5 *ngIf="isUpdate" class="modal-title" id="staticBackdropLabel">Actualizar Contacto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="nuevoContacto()"></button>
         </div>
         <div class="modal-body">
-            <form>
+            <form [formGroup]="formContacto">
                 <div class="mb-3">
                     <label for="recipient-name" class="col-form-label">Id:</label>
-                    <input type="text" class="form-control" id="id">
+                    <input type="text" class="form-control" id="id" formControlName="id">
                 </div>
                 <div class="mb-3">
                   <label for="recipient-name" class="col-form-label">Nombres:</label>
-                  <input type="text" class="form-control" id="nombres">
+                  <input type="text" class="form-control" id="nombres" formControlName="nombres">
                 </div>
                 <div class="mb-3">
                     <label for="recipient-name" class="col-form-label">Apellidos:</label>
-                    <input type="text" class="form-control" id="apellidos">
+                    <input type="text" class="form-control" id="apellidos" formControlName="apellidos">
                 </div>
                 <div class="mb-3">
                     <label for="recipient-name" class="col-form-label">Celular:</label>
-                    <input type="text" class="form-control" id="celular">
+                    <input type="text" class="form-control" id="celular" formControlName="celular">
                 </div>
                 <div class="mb-3">
                     <label for="recipient-name" class="col-form-label">Email:</label>
-                    <input type="text" class="form-control" id="email">
+                    <input type="text" class="form-control" id="email" formControlName="email">
                 </div>
                 <div class="mb-3">
                     <label for="recipient-name" class="col-form-label">Dirección:</label>
-                    <input type="text" class="form-control" id="direccion">
+                    <input type="text" class="form-control" id="direccion" formControlName="direccion">
                 </div>                
               </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary">Guardar</button>
+          <button *ngIf="!isUpdate" type="button" class="btn btn-primary" (click)="save()">Guardar</button>
+          <button *ngIf="isUpdate" type="button" class="btn btn-primary" (click)="update()">Actualizar</button>
         </div>
       </div>
     </div>
